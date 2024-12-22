@@ -36,9 +36,9 @@ spzx:
       - /webjars/**
       - /swagger-ui/**
       - /*/api-docs/**
-#  minio:
-#    #TODO 将127.0.0.1修改成自己的ip
-#    endpointUrl: http://127.0.0.1:9000
-#    accessKey: minioadmin
-#    secreKey: minioadmin
-#    bucketName: spzx-bucket
+  minio:
+    #TODO 将127.0.0.1修改成自己的ip
+    endpointUrl: http://127.0.0.1:9000
+    accessKey: minioadmin
+    secreKey: minioadmin
+    bucketName: spzx-bucket

@@ -1,6 +1,9 @@
 package org.example.spzx.manager.service;
 
+import com.github.pagehelper.PageInfo;
+import org.example.spzx.model.dto.system.AssginRoleDto;
 import org.example.spzx.model.dto.system.LoginDto;
+import org.example.spzx.model.dto.system.SysUserDto;
 import org.example.spzx.model.entity.system.SysUser;
 import org.example.spzx.model.vo.system.LoginVo;
 
@@ -20,4 +23,14 @@ public interface SysUserService {
     public SysUser getUserInfo(String token);
 
     public void logout(String token);
+
+    PageInfo<SysUser> findByPage(SysUserDto sysUserDto, Integer pageNum, Integer pageSize);
+
+    void saveSysUser(SysUser sysUser);
+
+    void updateSysUser(SysUser sysUser);
+
+    void deleteById(Long userId);
+
+    void doAssign(AssginRoleDto assginRoleDto);
 }

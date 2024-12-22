@@ -2,6 +2,7 @@ package org.example.spzx.manager.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.example.spzx.manager.service.SysMenuService;
 import org.example.spzx.manager.service.SysUserService;
 import org.example.spzx.manager.service.ValidateCodeService;
 import org.example.spzx.model.dto.system.LoginDto;
@@ -9,6 +10,7 @@ import org.example.spzx.model.entity.system.SysUser;
 import org.example.spzx.model.vo.common.Result;
 import org.example.spzx.model.vo.common.ResultCodeEnum;
 import org.example.spzx.model.vo.system.LoginVo;
+import org.example.spzx.model.vo.system.SysMenuVo;
 import org.example.spzx.model.vo.system.ValidateCodeVo;
 import org.example.spzx.utils.AuthContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author Romic
@@ -34,6 +38,9 @@ public class IndexController {
 
     @Autowired
     private ValidateCodeService validateCodeService;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
 
     @PostMapping(value = "/login")
@@ -62,6 +69,13 @@ public class IndexController {
     public Result logout(@RequestHeader(value = "token") String token) {
         sysUserService.logout(token) ;
         return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+    @Operation(summary = "查询用户可以操纵的菜单")
+    @GetMapping("/menus")
+    public Result menus() {
+        List<SysMenuVo> sysMenuVoList =  sysMenuService.findUserMenuList() ;
+        return Result.build(sysMenuVoList , ResultCodeEnum.SUCCESS) ;
     }
 
 }

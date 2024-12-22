@@ -45,27 +45,6 @@
         order by id desc
     </select>
 
-    <insert id="saveSysUser">
-        insert into sys_user (
-            id,
-            username,
-            password,
-            name,
-            phone,
-            avatar,
-            description,
-            status
-        ) values (
-                     #{id},
-                     #{userName},
-                     #{password},
-                     #{name},
-                     #{phone},
-                     #{avatar},
-                     #{description},
-                     #{status}
-                 )
-    </insert>
 
     <update id="updateSysUser">
         update sys_user set
@@ -94,5 +73,31 @@
         where
         id = #{id}
     </update>
+
+    <select id="findByUserName" resultType="org.example.spzx.model.entity.system.SysUser">
+        select <include refid="columns" /> from sys_user where username = #{userName}
+    </select>
+
+    <insert id="saveSysUser">
+        insert into sys_user (
+            id,
+            username,
+            password,
+            name,
+            phone,
+            avatar,
+            description,
+            status
+        ) values (
+                     #{id},
+                     #{userName},
+                     #{password},
+                     #{name},
+                     #{phone},
+                     #{avatar},
+                     #{description},
+                     #{status}
+                 )
+    </insert>
 
 </mapper>

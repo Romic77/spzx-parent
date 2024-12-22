@@ -2,18 +2,25 @@ package org.example.spzx.manager.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.example.exception.GuiguException;
+import org.example.spzx.manager.mapper.SysRoleUserMapper;
 import org.example.spzx.manager.mapper.SysUserMapper;
 import org.example.spzx.manager.service.SysUserService;
+import org.example.spzx.model.dto.system.AssginRoleDto;
 import org.example.spzx.model.dto.system.LoginDto;
+import org.example.spzx.model.dto.system.SysUserDto;
 import org.example.spzx.model.entity.system.SysUser;
 import org.example.spzx.model.vo.common.ResultCodeEnum;
 import org.example.spzx.model.vo.system.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +33,9 @@ import java.util.concurrent.TimeUnit;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper ;
+
+    @Autowired
+    private SysRoleUserMapper sysRoleUserMapper ;
 
     @Autowired
     private RedisTemplate<String , String> redisTemplate ;
@@ -81,5 +91,51 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public void logout(String token) {
         redisTemplate.delete("user:login:" + token) ;
+    }
+
+    @Override
+    public PageInfo<SysUser> findByPage(SysUserDto sysUserDto, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum , pageSize);
+        List<SysUser> sysUserList = sysUserMapper.findByPage(sysUserDto) ;
+        return new PageInfo(sysUserList) ;
+    }
+
+    @Override
+    public void saveSysUser(SysUser sysUser) {
+        // 根据输入的用户名查询用户
+        SysUser dbSysUser = sysUserMapper.findByUserName(sysUser.getUserName()) ;
+        if(dbSysUser != null) {
+            throw new GuiguException(ResultCodeEnum.USER_NAME_IS_EXISTS) ;
+        }
+
+        // 对密码进行加密
+        String password = sysUser.getPassword();
+        String digestPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+        sysUser.setPassword(digestPassword);
+        sysUser.setStatus(1);
+        sysUserMapper.saveSysUser(sysUser) ;
+    }
+
+    @Override
+    public void updateSysUser(SysUser sysUser) {
+        sysUserMapper.updateSysUser(sysUser) ;
+    }
+
+    @Override
+    public void deleteById(Long userId) {
+        sysUserMapper.deleteById(userId) ;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void doAssign(AssginRoleDto assginRoleDto) {
+        // 删除之前的所有的用户所对应的角色数据
+        sysRoleUserMapper.deleteByUserId(assginRoleDto.getUserId()) ;
+
+        // 分配新的角色数据
+        List<Long> roleIdList = assginRoleDto.getRoleIdList();
+        roleIdList.forEach(roleId->{
+            sysRoleUserMapper.doAssign(assginRoleDto.getUserId(),roleId);
+        });
     }
 }
