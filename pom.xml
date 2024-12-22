@@ -16,6 +16,7 @@
         <module>spzx-manager</module>
         <module>spzx-common/common-util</module>
         <module>spzx-common/common-service</module>
+        <module>spzx-common/common-log</module>
     </modules>
 
     <!-- 指定父工程 -->

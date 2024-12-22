@@ -17,4 +17,8 @@ public interface ProductService {
     Product getById(Long id);
 
     void updateById(Product product);
+
+    void updateAuditStatus(Long id, Integer auditStatus);
+
+    void updateStatus(Long id, Integer status);
 }

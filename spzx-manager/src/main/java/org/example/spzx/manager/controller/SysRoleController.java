@@ -2,6 +2,7 @@ package org.example.spzx.manager.controller;
 
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.example.spzx.log.annotation.Log;
 import org.example.spzx.manager.service.SysRoleService;
 import org.example.spzx.model.dto.system.SysRoleDto;
 import org.example.spzx.model.entity.system.SysRole;
@@ -37,6 +38,7 @@ public class SysRoleController {
         return Result.build(sysRoleService.findByPage(sysRoleDto, pageNum, pageSize), ResultCodeEnum.SUCCESS);
     }
 
+    @Log(title = "角色添加",businessType = 0) //添加Log注解，设置属性
     @PostMapping(value = "/saveSysRole")
     public Result saveSysRole(@RequestBody SysRole SysRole) {
         sysRoleService.saveSysRole(SysRole) ;
