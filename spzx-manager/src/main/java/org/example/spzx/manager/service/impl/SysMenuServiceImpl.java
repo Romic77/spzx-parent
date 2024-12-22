@@ -3,6 +3,7 @@ package org.example.spzx.manager.service.impl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.example.exception.GuiguException;
 import org.example.spzx.manager.mapper.SysMenuMapper;
+import org.example.spzx.manager.mapper.SysRoleMenuMapper;
 import org.example.spzx.manager.service.SysMenuService;
 import org.example.spzx.manager.utils.MenuHelper;
 import org.example.spzx.model.entity.system.SysMenu;
@@ -12,6 +13,7 @@ import org.example.spzx.model.vo.system.SysMenuVo;
 import org.example.spzx.utils.AuthContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
+    @Autowired
+    private SysRoleMenuMapper sysRoleMenuMapper;
+
     @Override
     public List<SysMenu> findNodes() {
         List<SysMenu> sysMenuList = sysMenuMapper.selectAll();
@@ -36,9 +41,31 @@ public class SysMenuServiceImpl implements SysMenuService {
         return treeList;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save(SysMenu sysMenu) {
+        // 添加新的节点
         sysMenuMapper.insert(sysMenu) ;
+
+        // 新添加一个菜单，那么此时就需要将该菜单所对应的父级菜单设置为半开
+        updateSysRoleMenuIsHalf(sysMenu) ;
+    }
+
+    private void updateSysRoleMenuIsHalf(SysMenu sysMenu) {
+
+        // 查询是否存在父节点
+        SysMenu parentMenu = sysMenuMapper.selectById(sysMenu.getParentId());
+
+        if(parentMenu != null) {
+
+            // 将该id的菜单设置为半开
+            sysRoleMenuMapper.updateSysRoleMenuIsHalf(parentMenu.getId()) ;
+
+            // 递归调用
+            updateSysRoleMenuIsHalf(parentMenu) ;
+
+        }
+
     }
 
     @Override

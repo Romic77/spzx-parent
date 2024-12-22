@@ -72,6 +72,10 @@
         WHERE ur.user_id=#{userId} and m.is_deleted = 0
     </select>
 
+    <select id="selectById" resultMap="sysMenuMap">
+        select <include refid="columns" /> from sys_menu where id = #{id}
+    </select>
+
     <update id="deleteById">
         update sys_menu set
                             update_time = now() ,
