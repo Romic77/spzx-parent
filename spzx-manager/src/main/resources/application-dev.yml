@@ -1,0 +1,44 @@
+# 配置服务端口号
+server:
+  port: 8501
+
+# 配置数据库连接信息
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #TODO 将192.168.10.100修改成自己的ip
+    url: jdbc:mysql://op.romic.cc:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: root
+    password: YMFsG4JpJSs4v8wp
+  # Redis的相关配置
+  data:
+    redis:
+      #TODO 将192.168.10.100修改成自己的ip
+      host: op.romic.cc
+      port: 6379
+      password: Mk9TNkg49baLwo
+      database: 0
+
+# mybatis的配置
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+  mapper-locations: classpath:/mapper/*/*.xml
+
+# 自定义配置
+spzx:
+  auth:
+    noAuthUrls:
+      - /admin/system/index/login
+      - /admin/system/index/generateValidateCode
+      - /swagger-resources/**
+      - /doc.html
+      - /webjars/**
+      - /swagger-ui/**
+      - /*/api-docs/**
+#  minio:
+#    #TODO 将127.0.0.1修改成自己的ip
+#    endpointUrl: http://127.0.0.1:9000
+#    accessKey: minioadmin
+#    secreKey: minioadmin
+#    bucketName: spzx-bucket
