@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageInfo<Product> findByPage(Integer page, Integer limit, ProductDto productDto) {
-        PageHelper.startPage(page , limit) ;
-        List<Product> productList =  productMapper.findByPage(productDto) ;
+        PageHelper.startPage(page, limit);
+        List<Product> productList = productMapper.findByPage(productDto);
         return new PageInfo<>(productList);
     }
 
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
         // 保存商品sku数据
         List<ProductSku> productSkuList = product.getProductSkuList();
-        for(int i=0,size=productSkuList.size(); i<size; i++) {
+        for (int i = 0, size = productSkuList.size(); i < size; i++) {
 
             // 获取ProductSku对象
             ProductSku productSku = productSkuList.get(i);
@@ -103,7 +103,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateAuditStatus(Long id, Integer auditStatus) {
         Product product = new Product();
         product.setId(id);
-        if(auditStatus == 1) {
+        if (auditStatus == 1) {
             product.setAuditStatus(1);
             product.setAuditMessage("审批通过");
         } else {
@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateStatus(Long id, Integer status) {
         Product product = new Product();
         product.setId(id);
-        if(status == 1) {
+        if (status == 1) {
             product.setStatus(1);
         } else {
             product.setStatus(-1);
