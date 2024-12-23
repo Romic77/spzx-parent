@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.example.exception.GuiguException;
+import org.example.spzx.common.exception.GuiguException;
 import org.example.spzx.manager.mapper.SysRoleUserMapper;
 import org.example.spzx.manager.mapper.SysUserMapper;
 import org.example.spzx.manager.service.SysUserService;

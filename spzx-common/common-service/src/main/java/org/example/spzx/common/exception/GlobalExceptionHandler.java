@@ -1,4 +1,4 @@
-package org.example.exception;
+package org.example.spzx.common.exception;
 
 /**
  * @author ljl

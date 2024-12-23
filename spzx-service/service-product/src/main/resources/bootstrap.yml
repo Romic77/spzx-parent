@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-product
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      # Nacos 服务注册与发现
+      discovery:
+        server-addr: ${common.nacos.server}
+        namespace: ${common.nacos.namespace}
+      # Nacos 配置中心
+      config:
+        server-addr: ${common.nacos.server}
+        namespace: ${common.nacos.namespace}
+        # 配置文件格式
+        file-extension: yml
+        # 常规配置文件（ # extension-configs 优先级大于 shared-configs，在 shared-configs 之后加载）
+        # 共享配置
+        shared-configs:
+          - application.${spring.cloud.nacos.config.file-extension}
+          - common.${spring.cloud.nacos.config.file-extension}

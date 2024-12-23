@@ -1,4 +1,4 @@
-package org.example.exception;
+package org.example.spzx.common.exception;
 
 import lombok.Data;
 import org.example.spzx.model.vo.common.ResultCodeEnum;

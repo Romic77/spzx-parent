@@ -1,0 +1,36 @@
+server:
+  port: 8084
+
+common:
+  nacos:
+    server: www.romic.cc:8848
+    namespace: f05de23c-7ae0-4715-b380-cc33f5edc8ca
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://op.romic.cc:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: YMFsG4JpJSs4v8wp
+    hikari:
+      #最小空闲连接，默认值10
+      minimum-idle: 10
+      #最大连接数，默认值10
+      maximum-pool-size: 30
+      #从池返回的连接的默认自动提交行为
+      auto-commit: true
+      #空闲连接超时时间，默认值600000（10分钟）
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      #池中连接关闭后的最长生命周期
+      max-lifetime: 1800000
+      #连接超时时间:毫秒
+      connection-timeout: 30000
+      validation-timeout: 1000
+      #连接测试查询
+      connection-test-query: SELECT 1
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/mapper/*.xml

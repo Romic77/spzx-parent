@@ -1,20 +1,33 @@
-package org.example.config;
+package org.example.spzx.common.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class Knife4jConfig {
+    public Knife4jConfig() {
+        log.info("Knife4jConfig init");
+    }
 
     @Bean
     public GroupedOpenApi adminApi() {      // 创建了一个api接口的分组
         return GroupedOpenApi.builder()
                 .group("admin-api")         // 分组名称
                 .pathsToMatch("/admin/**")  // 接口请求路径规则
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi webApi() {      // 创建了一个api接口的分组
+        return GroupedOpenApi.builder()
+                .group("web-api")         // 分组名称
+                .pathsToMatch("/api/**")  // 接口请求路径规则
                 .build();
     }
 

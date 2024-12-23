@@ -1,7 +1,7 @@
 package org.example.spzx.manager.service.impl;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.example.exception.GuiguException;
+import org.example.spzx.common.exception.GuiguException;
 import org.example.spzx.manager.mapper.SysMenuMapper;
 import org.example.spzx.manager.mapper.SysRoleMenuMapper;
 import org.example.spzx.manager.service.SysMenuService;

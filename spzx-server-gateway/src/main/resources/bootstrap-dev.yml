@@ -1,0 +1,7 @@
+server:
+  port: 8500
+
+common:
+  nacos:
+    server: www.romic.cc:8848
+    namespace: f05de23c-7ae0-4715-b380-cc33f5edc8ca

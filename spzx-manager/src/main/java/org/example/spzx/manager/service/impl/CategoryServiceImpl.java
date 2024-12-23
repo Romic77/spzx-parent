@@ -3,7 +3,7 @@ package org.example.spzx.manager.service.impl;
 import com.alibaba.excel.EasyExcel;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.collections4.CollectionUtils;
-import org.example.exception.GuiguException;
+import org.example.spzx.common.exception.GuiguException;
 import org.example.spzx.manager.listener.ExcelListener;
 import org.example.spzx.manager.mapper.CategoryMapper;
 import org.example.spzx.manager.service.CategoryService;
