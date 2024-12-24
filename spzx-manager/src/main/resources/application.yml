@@ -5,3 +5,10 @@ spring:
     active: dev		# 激活的环境文件
   jackson:
     time-zone: Asia/Shanghai
+
+
+logging:
+  level:
+    org.springframework: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
+

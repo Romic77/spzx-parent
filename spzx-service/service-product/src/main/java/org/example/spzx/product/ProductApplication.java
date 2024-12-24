@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 @EnableDiscoveryClient
 @EnableCaching
 @MapperScan("org.example.spzx.product.mapper")
-@SpringBootApplication(scanBasePackages = {"org.example.spzx"})
+@SpringBootApplication
 public class ProductApplication implements CommandLineRunner {
 
     public static void main(String[] args) throws UnknownHostException {
