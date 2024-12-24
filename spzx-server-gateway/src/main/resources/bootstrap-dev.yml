@@ -4,4 +4,30 @@ server:
 common:
   nacos:
     server: www.romic.cc:8848
-    namespace: f05de23c-7ae0-4715-b380-cc33f5edc8ca
+    namespace: 986bf790-789c-4f9a-8040-68ab9bc11ca4
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            # 允许请求中携带的头信息,表示允许所有来源的跨域请求。
+            allowedHeaders: "*"
+            # 运行跨域的请求方式
+            allowedMethods: "*"
+            # 跨域检测的有效期,单位s
+            maxAge: 36000
+      routes: # 路由配置
+        - id: service-product
+          uri: lb://service-product
+          # service-product服务的路由规则,/api/product/index 先匹配predicate，在过滤filter
+          predicates:
+            - Path=/*/product/**
+          filters:
+            - StripPrefix=1

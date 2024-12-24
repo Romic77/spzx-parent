@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Tag(name = "首页接口管理")
 @RestController
-@RequestMapping(value="/api/product/index")
+@RequestMapping(value="/product/index")
 public class IndexController {
     @Autowired
     private CategoryService categoryService;
