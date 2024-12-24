@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-@SpringBootApplication(scanBasePackages = {"org.example.spzx"})
+@SpringBootApplication
 @MapperScan("org.example.spzx.manager.mapper")
 @Slf4j
 @EnableLogAspect

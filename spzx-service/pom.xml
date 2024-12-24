@@ -11,6 +11,9 @@
 
     <artifactId>spzx-service</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>service-product</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,9 +21,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <modules>
-        <module>service-product</module>
-    </modules>
 
     <dependencies>
 
