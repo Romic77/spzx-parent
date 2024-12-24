@@ -1,6 +1,6 @@
 package org.example.spzx.model.vo.h5;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import org.example.spzx.model.entity.product.Product;
 import org.example.spzx.model.entity.product.ProductSku;
 import io.swagger.v3.oas.annotations.media.Schema;

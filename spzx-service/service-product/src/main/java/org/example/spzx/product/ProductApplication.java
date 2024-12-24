@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
@@ -15,8 +16,9 @@ import java.net.UnknownHostException;
 
 @Slf4j
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"org.example.spzx"})
+@EnableCaching
 @MapperScan("org.example.spzx.product.mapper")
+@SpringBootApplication(scanBasePackages = {"org.example.spzx"})
 public class ProductApplication implements CommandLineRunner {
 
     public static void main(String[] args) throws UnknownHostException {
@@ -39,6 +41,6 @@ public class ProductApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("后台管理服务启动成功");
+        log.info("商品管理服务启动成功");
     }
 }

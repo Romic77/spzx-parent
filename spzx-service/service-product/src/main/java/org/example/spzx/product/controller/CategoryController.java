@@ -15,8 +15,7 @@ import java.util.List;
 
 @Tag(name = "分类接口管理")
 @RestController
-@RequestMapping(value="/api/product/category")
-@SuppressWarnings({"unchecked", "rawtypes"})
+@RequestMapping(value="/product/category")
 public class CategoryController {
    
    @Autowired

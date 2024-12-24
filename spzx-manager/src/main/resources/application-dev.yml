@@ -14,11 +14,17 @@ spring:
   # Redis的相关配置
   data:
     redis:
-      #TODO 将192.168.10.100修改成自己的ip
       host: op.romic.cc
       port: 6379
-      password: Mk9TNkg49baLwo
       database: 0
+      password: Mk9TNkg49baLwo
+      timeout: 3000
+      lettuce:
+        pool:
+          min-idle: 0
+          max-idle: 8
+          max-active: 8
+          max-wait: '-1ms'
 
 # mybatis的配置
 mybatis:

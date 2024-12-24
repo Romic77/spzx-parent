@@ -5,6 +5,7 @@ import org.example.spzx.model.entity.product.Category;
 import org.example.spzx.product.mapper.CategoryMapper;
 import org.example.spzx.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.findOneCategory();
     }
 
+    @Cacheable(value = "category", key = "'all'")
     @Override
     public List<Category> findCategoryTree() {
         List<Category> categoryList = categoryMapper.findAll();

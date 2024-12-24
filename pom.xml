@@ -20,6 +20,7 @@
         <module>spzx-service</module>
         <module>spzx-service/service-product</module>
         <module>spzx-server-gateway</module>
+        <module>spzx-common/common-redis</module>
     </modules>
 
     <!-- 指定父工程 -->
@@ -34,7 +35,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql.verison>8.0.32</mysql.verison>
-        <fastjson.version>2.0.21</fastjson.version>
+        <fastjson2.version>2.0.48</fastjson2.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatis.version>3.0.1</mybatis.version>
         <hutool.version>5.5.2</hutool.version>
@@ -81,11 +82,11 @@
                 <version>${mysql.version}</version>
             </dependency>
 
-            <!--fastjson-->
+            <!-- fastjson2 -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
 
             <!-- lombok依赖 -->

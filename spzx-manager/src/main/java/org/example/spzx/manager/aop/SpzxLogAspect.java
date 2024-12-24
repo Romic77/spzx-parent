@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @Slf4j
-public class LogAspect {            // 环绕通知切面类定义
+public class SpzxLogAspect {            // 环绕通知切面类定义
 
     @Autowired
     private AsyncOperLogService asyncOperLogService ;
